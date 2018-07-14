@@ -68,76 +68,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-GitABC" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/07/13/GitABC/" class="article-date">
-  <time datetime="2018-07-13T14:54:59.597Z" itemprop="datePublished">2018-07-13</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Git学习笔记"><a href="#Git学习笔记" class="headerlink" title="Git学习笔记"></a>Git学习笔记</h1><p>date: 2016-03-20 10:31:23<br>categeries:</p>
-<ul>
-<li>Git</li>
-</ul>
-<p><img src="./image/GitABC/dXQM4aU.png" alt="Git"></p>
-<h1 id="专用名词"><a href="#专用名词" class="headerlink" title="专用名词"></a><strong>专用名词</strong></h1><pre><code>1.  workspace:工作区
-2.  Index / Stage :暂存区
-3.  Repository：仓库区（或本地仓库）
-4.  Remote：远程仓库
-</code></pre><h1 id="一、集中式和分布式"><a href="#一、集中式和分布式" class="headerlink" title="一、集中式和分布式"></a>一、集中式和分布式</h1><pre><code>集中式版本控制，即建立中央服务器，在中央服务器保管所有版本控制内容。若你需要对某个内容进行修改时，需从“中央服务器”先提取至本地，在完成修改后，重新提交至“中央服务器”。常见的有SVN，CVS，VSS。
-
-分布式版本控制，即每个本地版本含有全套内容（每个本地版本即为中央服务器）。git属于分布式版本控制系统。
-</code></pre><h1 id="二、安装GIT"><a href="#二、安装GIT" class="headerlink" title="二、安装GIT"></a>二、安装GIT</h1><pre><code>msysgit是Windows版的Git，从http://msysgit.github.io/下载，然后按默认选项安装即可.
-</code></pre><h1 id="三、基本内容"><a href="#三、基本内容" class="headerlink" title="三、基本内容"></a>三、基本内容</h1><p>##3.1 创建版本库##<br>1、初始化一个Git仓库，使用”git init”</p>
-<p>2、添加文件至Git仓库：</p>
-<pre><code>a、使用git add&lt;file&gt;,PS:可以反复多次使用，添加多个文件
-b、使用git commit，完成提交。
-</code></pre><p>##3.2 版本回退##<br>    git status 理解仓库当前状态<br>    git diff 查看修改内容<br>    -&gt;HEAD 指向的版本就是当前版本。<br>    git log  查看提交历史<br>    git log –pretty=oneline</p>
-<pre><code>git relog  查看命令历史
-git reset --hard HEAD    回退版本
-</code></pre><p>##3.3 提交修改##<br>    git add 将工作区第一次修改的内容放入暂存区，准备提交<br>    git commit  只负责将暂存区内容提交至</p>
-<p>##3.4 撤销修改##<br>    git checkout – <file> 将工作区的修改全部撤销<br>    如果修改内容尚未放到“暂存区”，则回退到版本库版本；<br>    如果修改内容之前提交到“暂存区”，又做了修改，则撤销修改将回到“暂存区”版本</file></p>
-<p>##3.5 删除文件##<br>    git rm <file> 删除版本库文件<br>    如果误删文件，可通过git checkout恢复之前版本。</file></p>
-<h1 id="四、远程仓库管理"><a href="#四、远程仓库管理" class="headerlink" title="四、远程仓库管理"></a>四、远程仓库管理</h1><p>Git是分布式版本控制系统，同一个Git仓库，可以分布到不同的机器上。<br>gitHub.com是一个免费git仓库托管服务网站。</p>
-<p>##4.1 添加远程库##<br>    a、关联远程库<br>        git remote add origin git@server-name:path/repo-name.git;<br>    b、第一次推送master<br>        git push -u origin master<br>    c、再次推送<br>        git push origin master<br>        git push [remote] –force #强行推送当前分支到远程仓库，即使有冲突<br>        git push [remote] –all#推送所有分支到远程仓库</p>
-<p>##4.2 从远程库克隆##<br>    git clone <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:xxxxx/learnPython.git</p>
-<p>##4.3 其它命令##<br>    git fetch [remote]  #下载远程仓库的所有变动<br>    git remote -v 显示所有远程仓库<br>    git remote show #显示某个远程仓库的信息<br>    git pull [remote][branch] 取回远程仓库的变化，并与本地分支合并</p>
-<h1 id="五、分支管理"><a href="#五、分支管理" class="headerlink" title="五、分支管理"></a>五、分支管理</h1><p>##5.1 创建与合并分支##</p>
-<ul>
-<li>查看分支：git brach</li>
-<li>创建分支：git brache <name></name></li>
-<li>切换分支：git checkout <name></name></li>
-<li>创建+切换分支： git checkout -b <name></name></li>
-<li>合并某分支到当前分支： git merge <name></name></li>
-<li>删除分支： git branch -d <name></name></li>
-</ul>
-<p>##5.2 解决冲突##<br>    各个版本及分支都有修改主要在master和支线间。当git无法自动合并分支时，先人工解决冲突，再提交，完成合并。</p>
-<pre><code>**git log --graph 可以看到分支合并图**
-</code></pre><p>##5.3 分支管理策略##<br>    使用Fast forward模式进行合并分支，在这种模式下，删除分支后，将清除分支信息。<br>    git merge –no-ff -m “content” <branch></branch></p>
-<p>##5.4 Bug分支##<br>    git stash 将当前工作现场“储藏”起来。<br>    git stash list 查看封存的工作现场<br>    恢复工作现场<br>        一种：git stash apply  #需要删除stash内容<br>            git stash drop<br>        二种：git stash pop</p>
-<p>##5.5 Feature 分支##<br>    已经提交分支，进行强行删除：git branch -d <branchname></branchname></p>
-<p>##5.6 多人协作##<br>    1、查看远程库信息，git remove -v<br>    2、从本地推送分支git push origin branch-name ,如果推送失败，则先用 git pull 抓取远程的新提交文件；<br>    3、本地创建和远程分支：git checkout -b branch-name origin/branch-name<br>    4、建立本地分支和远程分支的关联：git branch –set-upstream branch-name origin/branch-name;</p>
-<p>#六、标签管理#<br>    1、查看所有标签：git tag<br>    2、创建标签：git tag <name> <commit id=""><br>    3、查看标签信息：git show <tagname><br>    4、删除标签：git tag -d <tag-name><br>    5、推送标签：git push origin <tag-name><br>    6、推送全部未推送的本地标签：git push origin –tags<br>    7、删除远程标签：git push origin :refs/tags/<tagname></tagname></tag-name></tag-name></tagname></commit></name></p>
-<p>#七、忽略特殊文件#<br>    需要忽略某些文件是，编写.gitignore<br>    .gitignore文件本身需要放在版本库中</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://qq17908/github.io/2018/07/13/GitABC/" data-id="cjjkvkvn50000ucr6mtp6dhzx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
     <article id="post-OKR工作法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/13/OKR工作法/" class="article-date">
@@ -184,7 +114,7 @@ git reset --hard HEAD    回退版本
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://qq17908/github.io/2018/07/13/OKR工作法/" data-id="cjjkvkvnp0001ucr6paeq8e6f" class="article-share-link">Share</a>
+      <a data-url="http://qq17908/github.io/2018/07/13/OKR工作法/" data-id="cjjkvy6nh0000q4r6e80cy39t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,10 +153,6 @@ git reset --hard HEAD    回退版本
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2018/07/13/GitABC/">(no title)</a>
-          </li>
         
           <li>
             <a href="/2018/07/13/OKR工作法/">OKR工作法</a>
